@@ -1,12 +1,20 @@
 #!/usr/bin/python3.6
 # -*-coding:Utf-8 -*
 
+import os
+import sys
 import pygame
 from pygame.locals import *
 from random import randrange
 
+if getattr(sys, 'frozen', False):
+    dir_path = sys._MEIPASS
+else:
+    dir_path = os.path.dirname(os.path.abspath(__file__))
+
 # Colors
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -16,6 +24,10 @@ BLUE = (0, 0, 255)
 TITLE = "PoissonGame by Baptiste"
 VERSION = "1.0"
 
+#dir_path += '.app/Contents/Resources/'
+
+#dir_path = '/Users/jamin/PycharmProjects/PoissonGame/dist/PoissonGame.app/Contents/Resources/'
+
 WIDTH, HEIGHT = 1280, 720
 
 pygame.init()
@@ -24,23 +36,23 @@ window = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption(TITLE)
 
 # Fonts
-carton60 = pygame.font.Font('font/Carton_Six.ttf', 60)
+carton60 = pygame.font.Font(os.path.join(dir_path, 'font/Carton_Six.ttf'), 60)
 
-dimbo38 = pygame.font.Font('font/Dimbo Regular.ttf', 38)
-dimbo42 = pygame.font.Font('font/Dimbo Regular.ttf', 42)
-dimbo46 = pygame.font.Font('font/Dimbo Regular.ttf', 46)
-dimbo52 = pygame.font.Font('font/Dimbo Regular.ttf', 52)
-dimbo56 = pygame.font.Font('font/Dimbo Regular.ttf', 56)
-dimbo60 = pygame.font.Font('font/Dimbo Regular.ttf', 60)
-dimbo64 = pygame.font.Font('font/Dimbo Regular.ttf', 64)
+dimbo38 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 38)
+dimbo42 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 42)
+dimbo46 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 46)
+dimbo52 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 52)
+dimbo56 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 56)
+dimbo60 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 60)
+dimbo64 = pygame.font.Font(os.path.join(dir_path, 'font/Dimbo Regular.ttf'), 64)
 
 
 class PoissonGame:
     def __init__(self):
         """ Classe principale du jeu """
         # Images
-        self.bg = pygame.image.load('img720/bg.jpg').convert()
-        self.logo = pygame.image.load('img720/logo.png').convert_alpha()
+        self.bg = pygame.image.load(os.path.join(dir_path, 'img720/bg.jpg')).convert()
+        self.logo = pygame.image.load(os.path.join(dir_path, 'img720/logo.png')).convert_alpha()
 
         # Menus
         self.start = dimbo52.render("Commencer", 1, WHITE)
@@ -121,7 +133,7 @@ class PoissonGame:
 
 class Mechant:
     def __init__(self, x, y, speed):
-        self.img = pygame.image.load('img720/requin.png').convert_alpha()
+        self.img = pygame.image.load(os.path.join(dir_path, 'img720/requin.png')).convert_alpha()
 
         self.x = x
         self.y = y
@@ -146,7 +158,7 @@ class Mechant:
 
 class Gentil:
     def __init__(self):
-        self.img = pygame.image.load('img720/gentil.png').convert_alpha()
+        self.img = pygame.image.load(os.path.join(dir_path, 'img720/gentil.png')).convert_alpha()
 
         self.x = 20
         self.y = 400
